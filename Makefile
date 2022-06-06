@@ -2,7 +2,7 @@ NAME = minishell
 
 CC = gcc
 CFLAG = -Werror -Wall -Wextra
-OFLAG = -lreadline -L ~/.brew/opt/readline/lib -I ./include
+OFLAG = -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 SRCS = srcs/mini.c
 
 OBJS = $(SRCS:.c=.o)
