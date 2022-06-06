@@ -12,6 +12,7 @@ int main(void)
 	{
 		str = readline(">");
 		// tree = parser(str);
+		rl_redisplay();
 		printf("%s\n", str);
 		add_history(str);
 		free(str);

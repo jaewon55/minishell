@@ -1,5 +1,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# include "bintree.h"
 
 enum e_token_type
 {
@@ -16,13 +17,8 @@ typedef struct s_token
 	char	*token;
 }			t_token;
 
-typedef struct s_tree
-{
-
-}			t_tree;
-
-t_tree	*parser(char *str);
-void	ft_error(char *str);
-void	ft_parsing(t_tree *tree, char *cmd_line);
+// t_tree	*parser(char *str);
+// void	ft_error(char *str);
+// void	ft_parsing(t_tree *tree, char *cmd_line);
 
 #endif
