@@ -13,6 +13,7 @@ void	ft_inorder(t_tree_node *node, t_cmd	*cmd)
 		ft_open_pipe(cmd, node->right);
 		ft_cmd_run(cmd);
 		close(cmd->pipe[P_WRITE]);
+		// set fd
 		cmd->out_fd = 1;
 	}
 	ft_inorder(node->right, cmd);

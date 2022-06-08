@@ -6,6 +6,8 @@
 # define TRUE 1
 # define P_READ 0
 # define P_WRITE 1
+# define STDIN 0
+# define STDOUT 1
 
 enum e_token_type
 {
