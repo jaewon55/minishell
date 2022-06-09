@@ -42,9 +42,11 @@ typedef struct s_cmd
 {
 	char	*path;
 	char	**argv;
+	char	**envp;
 	int		in_fd;
 	int		out_fd;
 	int		pipe[2];
+	pid_t	last_pid;
 }	t_cmd;
 
 

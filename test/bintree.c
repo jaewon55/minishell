@@ -62,6 +62,7 @@ void	delorder(t_tree_node **node)
 		delorder(&(*node)->right);
 		temp = *node;
 		*node = NULL;
+		// free(temp->data.token);
 		free(temp);
 	}
 }
