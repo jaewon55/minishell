@@ -3,19 +3,18 @@
 
 static void	ft_set_fd(t_cmd *cmd)
 {
-	if (cmd->in_fd)
+	if (cmd->in_fd != STDIN)
+	{
 		dup2(cmd->in_fd, STDIN);
-	if (cmd->out_fd > 1 && cmd->pipe[P_WRITE] > 0)
+		close(cmd->in_fd);
+	}
+	if (cmd->out_fd != STDOUT)
 	{
 		dup2(cmd->out_fd, STDOUT);
-		close(cmd->pipe[P_WRITE]);
+		close(cmd->out_fd);
 	}
-	else if (cmd->out_fd > 1)
-		dup2(cmd->out_fd, STDOUT);
 	else if (cmd->pipe[P_WRITE] > 0)
 		dup2(cmd->pipe[P_WRITE], STDOUT);
-	close(cmd->in_fd);
-	close(cmd->out_fd);
 	close(cmd->pipe[P_READ]);
 	close(cmd->pipe[P_WRITE]);
 }
@@ -27,7 +26,7 @@ static void	ft_child_proc(t_cmd *cmd)
 	{
 		ft_putstr_fd("bash : ", 2);
 		ft_putstr_fd(cmd->argv[0], 2);
-		ft_putstr_fd(": command not found", 2);
+		ft_putstr_fd(": command not found\n", 2);
 		exit(127);
 	}
 	ft_set_fd(cmd);
@@ -40,8 +39,10 @@ static void	ft_clear_cmd(t_cmd *cmd)
 	int	i;
 
 	close(cmd->pipe[P_WRITE]);
-	close(cmd->in_fd);
-	close(cmd->out_fd);
+	if (cmd->in_fd > STDIN)
+		close(cmd->in_fd);
+	if (cmd->out_fd > STDOUT)
+		close(cmd->out_fd);
 	free(cmd->path);
 	cmd->path = NULL;
 	i = -1;

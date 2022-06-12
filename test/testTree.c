@@ -1,6 +1,7 @@
 #include "minishell.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 #define	TEST1 "ls"
 #define	TEST2 "ls > file1"
@@ -23,6 +24,7 @@
 #define TEST19 "echo hello | cat | null | ls | null | ls"
 #define TEST20 "./a.out"
 #define TEST21 "bash a.out"
+
 #define TEST22 "cd"
 #define TEST23 "cd /null"
 #define TEST24 "cd /goinfre/jaewchoi/42seoul/7_Minishell/"
@@ -646,32 +648,43 @@ t_tree	*ft_test37()
 	return (tree);
 }
 
-int main()
+int main(int ac, char **av, char **env)
 {
 	t_tree	*tree;
-	t_tree_node	*temp;
+	t_cmd	cmd;
+	int		status;
 
-	tree = ft_test1();
-	delete_tree(tree);
-	tree = ft_test2();
-	delete_tree(tree);
-	tree = ft_test3();
-	delete_tree(tree);
-	tree = ft_test4();
-	delete_tree(tree);
-	tree = ft_test5();
-	delete_tree(tree);
-	tree = ft_test6();
-	delete_tree(tree);
-	tree = ft_test7();
-	delete_tree(tree);
-	tree = ft_test8();
-	delete_tree(tree);
-	tree = ft_test9();
-	delete_tree(tree);
 	tree = ft_test10();
+	cmd.path = NULL;
+	cmd.argv = NULL;
+	cmd.envp = env;
+	cmd.in_fd = 0;
+	cmd.out_fd = 1;
+	printf("============================================\n");
+	ft_search_tree(tree->root, &cmd);
+	while (wait(&status) > 0);
 	delete_tree(tree);
+	cmd.path = NULL;
+	cmd.argv = NULL;
+	// tree = ft_test2();
+	// delete_tree(tree);
+	// tree = ft_test3();
+	// delete_tree(tree);
+	// tree = ft_test4();
+	// delete_tree(tree);
+	// tree = ft_test5();
+	// delete_tree(tree);
+	// tree = ft_test6();
+	// delete_tree(tree);
+	// tree = ft_test7();
+	// delete_tree(tree);
+	// tree = ft_test8();
+	// delete_tree(tree);
+	// tree = ft_test9();
+	// delete_tree(tree);
+	// tree = ft_test10();
+	// delete_tree(tree);
 	tree = NULL;
-	// system("leaks a.out");
+	system("leaks test | grep leaked");
 	return 0;
 }

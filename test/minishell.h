@@ -1,5 +1,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# include <sys/wait.h>
 # define FAIL 0
 # define SUCCESS 1
 # define FALSE 0
@@ -8,6 +9,9 @@
 # define P_WRITE 1
 # define STDIN 0
 # define STDOUT 1
+
+
+#include <stdio.h>
 
 enum e_token_type
 {
@@ -55,9 +59,17 @@ t_tree_node	*insert_left_node(t_tree_node *parent, t_tree_node child);
 t_tree_node	*insert_right_node(t_tree_node *parent, t_tree_node child);
 void		delorder(t_tree_node **node);
 void		delete_tree(t_tree *tree);
+void		ft_error(char *str);
 
-void	ft_error(char *str);
-// t_tree	*parser(char *str);
-// void	ft_parsing(t_tree *tree, char *cmd_line);
+void	ft_search_tree(t_tree_node *node, t_cmd	*cmd);
+void	ft_cmd_run(t_cmd *cmd);
+char	*ft_get_path(char *str, char **envp);
+void	ft_open_pipe(t_cmd *cmd, t_tree_node *node);
+int		ft_visit_cmd(t_token token, t_cmd *cmd);
+int		ft_visit_double_redi_left(t_token token, t_cmd *cmd);
+int		ft_visit_double_redi_right(t_token token, t_cmd *cmd);
+int		ft_visit_redi_left(t_token token, t_cmd *cmd);
+int		ft_visit_redi_right(t_token token, t_cmd *cmd);
+int		ft_visit(t_token token, t_cmd *cmd);
 
 #endif

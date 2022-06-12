@@ -1,6 +1,5 @@
 #include "minishell.h"
 #include "libft.h"
-#include <sys/wait.h>
 
 static void	ft_set_string(t_cmd *cmd, char *str)
 {
@@ -21,11 +20,24 @@ static void	ft_set_string(t_cmd *cmd, char *str)
 	ft_strlcpy(cmd->argv[1], str, len);
 }
 
+static char	*ft_set_path(char *path)
+{
+	int	i;
+
+	i = -1;
+	while (path[++i])
+	{
+		if (path[i] == '\n')
+			path[i] = '\0';
+	}
+	return (path);
+}
+
 static char	*ft_read_pipe(int fd)
 {
 	char	*path;
 	char	*temp;
-	char	*buf[512];
+	char	buf[512];
 	int		buf_size;
 
 	path = ft_strdup("");
@@ -46,10 +58,10 @@ static char	*ft_read_pipe(int fd)
 			ft_error("malloc fail\n");
 		free(temp);
 	}
-	return (path);
+	return (ft_set_path(path));
 }
 
-char	*ft_get_path(char *str)
+char	*ft_get_path(char *str, char **envp)
 {
 	t_cmd	cmd;
 	int		status;
@@ -57,8 +69,9 @@ char	*ft_get_path(char *str)
 
 	ft_set_string(&cmd, str);
 	pipe(cmd.pipe);
-	cmd.in_fd = 0;
-	cmd.out_fd = -1;
+	cmd.in_fd = STDIN;
+	cmd.out_fd = STDOUT;
+	cmd.envp = envp;
 	ft_cmd_run(&cmd);
 	waitpid(cmd.last_pid, &status, 0);
 	path = ft_read_pipe(cmd.pipe[P_READ]);
