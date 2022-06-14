@@ -44,6 +44,8 @@
 #define TEST36 "ls ./srcs | grep .c > file1"
 #define TEST37 "ls ./srcs | grep .c file2"
 
+#define TEST38 "cat << end"
+
 void displayTree(t_tree_node *node)
 {
 	if (node)
@@ -189,6 +191,9 @@ void	display(int i)
 		break;
 	case 37:
 		printf("%s", TEST37);
+		break;
+	case 38:
+		printf("%s", TEST38);
 		break;
 	default:
 		break;
@@ -648,13 +653,25 @@ t_tree	*ft_test37()
 	return (tree);
 }
 
+t_tree	*ft_test38()
+{
+	t_tree	*tree;
+	t_tree_node	*temp;
+
+	display(38);
+	tree = create_bin_tree((t_tree_node){{CMD, "cat"}, 0, NULL, NULL});
+	insert_left_node(tree->root, (t_tree_node){{DREDI_L, "end"}, 0, NULL, NULL});
+	displayTree(tree->root);
+	return (tree);
+}
+
 int main(int ac, char **av, char **env)
 {
 	t_tree	*tree;
 	t_cmd	cmd;
 	int		status;
 
-	tree = ft_test8();
+	tree = ft_test38();
 	cmd.path = NULL;
 	cmd.argv = NULL;
 	cmd.envp = env;

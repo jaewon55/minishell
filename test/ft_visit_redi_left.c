@@ -20,7 +20,7 @@ static void	ft_clear_cmd(t_cmd *cmd)
 
 int	ft_visit_redi_left(t_token token, t_cmd *cmd)
 {
-	if (cmd->in_fd)
+	if (cmd->in_fd != STDIN)
 		close(cmd->in_fd);
 	cmd->in_fd = open(token.token, O_RDONLY);
 	if (cmd->in_fd < 0)
