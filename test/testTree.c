@@ -654,7 +654,7 @@ int main(int ac, char **av, char **env)
 	t_cmd	cmd;
 	int		status;
 
-	tree = ft_test10();
+	tree = ft_test8();
 	cmd.path = NULL;
 	cmd.argv = NULL;
 	cmd.envp = env;
@@ -685,6 +685,6 @@ int main(int ac, char **av, char **env)
 	// tree = ft_test10();
 	// delete_tree(tree);
 	tree = NULL;
-	system("leaks test | grep leaked");
+	// system("leaks test | grep leaked");
 	return 0;
 }
