@@ -10,7 +10,10 @@ static void	ft_write_input(char *str, int out_fd, size_t len)
 	int	i;
 
 	i = -1;
-	while ()
+	while (str[++i])
+	{
+		if (str[i] == '`' || str[i] == '$' )
+	}
 }
 
 static void	ft_read_input(char *limiter, int out_fd)
