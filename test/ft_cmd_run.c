@@ -1,5 +1,6 @@
 #include "minishell.h"
 #include "libft.h"
+#include <stdlib.h>
 
 static void	ft_set_fd(t_cmd *cmd)
 {
@@ -56,6 +57,12 @@ void	ft_cmd_run(t_cmd *cmd)
 {
 	pid_t	pid;
 
+	if (cmd->builtins)
+	{
+		ft_builtin_run(cmd);
+		ft_clear_cmd(cmd);
+		return ;
+	}
 	pid = fork();
 	if (pid < 0)
 		ft_error("fork fail\n");

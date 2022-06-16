@@ -72,6 +72,7 @@ char	*ft_get_path(char *str, char **envp)
 	cmd.in_fd = STDIN;
 	cmd.out_fd = STDOUT;
 	cmd.envp = envp;
+	cmd.builtins = FALSE;
 	ft_cmd_run(&cmd);
 	waitpid(cmd.last_pid, &status, 0);
 	path = ft_read_pipe(cmd.pipe[P_READ]);

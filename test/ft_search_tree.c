@@ -8,7 +8,7 @@ void	ft_search_tree(t_tree_node *node, t_cmd	*cmd)
 	if (!ft_visit(node->data, cmd))
 		delorder(&(node->left));
 	ft_search_tree(node->left, cmd);
-	if (node->data.type == CMD && cmd->path)
+	if (node->data.type == CMD)
 	{
 		ft_open_pipe(cmd, node->right);
 		ft_cmd_run(cmd);

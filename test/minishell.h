@@ -13,6 +13,17 @@
 
 #include <stdio.h>
 
+enum e_builtins
+{
+	ECHO = 1,
+	CD,
+	PWD,
+	EXPORT,
+	UNSET,
+	ENV,
+	EXIT
+};
+
 enum e_token_type
 {
 	CMD = 0,
@@ -51,6 +62,7 @@ typedef struct s_cmd
 	int		out_fd;
 	int		pipe[2];
 	pid_t	last_pid;
+	int		builtins;
 }	t_cmd;
 
 

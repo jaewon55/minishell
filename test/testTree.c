@@ -677,6 +677,7 @@ int main(int ac, char **av, char **env)
 	cmd.envp = env;
 	cmd.in_fd = 0;
 	cmd.out_fd = 1;
+	cmd.builtins = FALSE;
 	printf("============================================\n");
 	ft_search_tree(tree->root, &cmd);
 	while (wait(&status) > 0);
