@@ -660,7 +660,7 @@ t_tree	*ft_test38()
 
 	display(38);
 	tree = create_bin_tree((t_tree_node){{CMD, "cat"}, 0, NULL, NULL});
-	insert_left_node(tree->root, (t_tree_node){{DREDI_L, "end"}, 0, NULL, NULL});
+	insert_left_node(tree->root, (t_tree_node){{DREDI_L, "\"e\'n\'d\""}, 0, NULL, NULL});
 	displayTree(tree->root);
 	return (tree);
 }

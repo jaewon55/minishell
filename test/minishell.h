@@ -71,5 +71,7 @@ int		ft_visit_double_redi_right(t_token token, t_cmd *cmd);
 int		ft_visit_redi_left(t_token token, t_cmd *cmd);
 int		ft_visit_redi_right(t_token token, t_cmd *cmd);
 int		ft_visit(t_token token, t_cmd *cmd);
+char	*ft_check_eof(char *eof);
+void	ft_pasing_multiline(char *eof, int out_fd);
 
 #endif
