@@ -39,42 +39,6 @@ static void	ft_child_proc(t_cmd *cmd)
 	exit(0);
 }
 
-static void	ft_split_env(char *str, char *name, char *value)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (str[++i])
-	{
-		if (i == 0 && ft_isalpha(str[i]))
-		if (str[i] == '=')
-			break ;
-		name[j++] = str[i];
-	}
-	//.....
-}
-
-static void	ft_add_env(t_cmd *cmd)
-{
-	int		i;
-	int		size;
-	char	*name;
-	char	*value;
-
-	i = 0;
-	while (cmd->argv[++i])
-	{
-		size = ft_strlen(cmd->argv[i]);
-		name = ft_calloc(size, sizeof(char));
-		value = ft_calloc(size, sizeof(char));
-		if (!name || !value)
-			ft_error("malloc fail\n");
-		ft_split_env(cmd->argv[i], name, value);
-	}
-}
-
 void	ft_export(t_cmd *cmd)
 {
 	pid_t	pid;
